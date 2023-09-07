@@ -3,7 +3,7 @@ import {Image} from '@shopify/hydrogen';
 
 const CollectionCard = ({collection}) => {
   const {title, handle, image} = collection;
-  if (image === null) return null;
+  // if (image === null) return null;
   return (
     <Link
       to={`/collections/${handle}`}

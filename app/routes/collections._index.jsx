@@ -1,4 +1,5 @@
 import {useLoaderData} from '@remix-run/react';
+
 import CollectionCard from '~/components/CollectionCard';
 
 const seo = () => ({
@@ -20,8 +21,7 @@ const Collections = () => {
     <div className="mt-16 center-container">
       <div className="justify-around gap-10 md:flex">
         {collections?.nodes?.map((c) => (
-          // <CollectionCard collection={c} key={c.id} />
-          <h1 key={c.id}>{c.title}</h1>
+          <CollectionCard collection={c} key={c.id} />
         ))}
       </div>
     </div>
