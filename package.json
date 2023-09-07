@@ -28,7 +28,8 @@
     "@shopify/prettier-config": "^1.1.2",
     "eslint": "^8.20.0",
     "eslint-plugin-hydrogen": "0.12.2",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.3.3"
   },
   "engines": {
     "node": ">=16.13"

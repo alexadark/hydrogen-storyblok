@@ -3,32 +3,16 @@ import {
   Meta,
   Outlet,
   Scripts,
-  LiveReload,
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import appStyles from './styles/app.css';
+import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
-import {useNonce} from '@shopify/hydrogen';
-
-// This is important to avoid re-fetching root queries on sub-navigations
-export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
-  // revalidate when a mutation is performed e.g add to cart, login...
-  if (formMethod && formMethod !== 'GET') {
-    return true;
-  }
-
-  // revalidate when manually revalidating via useRevalidator
-  if (currentUrl.toString() === nextUrl.toString()) {
-    return true;
-  }
-
-  return false;
-};
+import {Layout} from './components/Layout';
 
 export const links = () => {
   return [
-    {rel: 'stylesheet', href: appStyles},
+    {rel: 'stylesheet', href: styles},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
@@ -47,7 +31,6 @@ export async function loader({context}) {
 }
 
 export default function App() {
-  const nonce = useNonce();
   const data = useLoaderData();
 
   const {name} = data.layout.shop;
@@ -61,12 +44,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
-        <Outlet />
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
+        <Layout>
+          <Outlet />
+        </Layout>
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   );
