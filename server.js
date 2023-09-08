@@ -13,15 +13,24 @@ import {
   createCookieSessionStorage,
 } from '@shopify/remix-oxygen';
 
-/**
- * Export a fetch handler in module format.
- */
+function setContentSecurityPolicy(response, env) {
+  const csp = `
+    default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
+    style-src 'self' 'unsafe-inline' https://cdn.shopify.com https://fonts.googleapis.com;
+    img-src *;
+    font-src *;
+    connect-src 'self' ${env.PUBLIC_STORE_DOMAIN} https://cdn.shopify.com https://shopify.com;
+    frame-src *;
+    frame-ancestors *;
+  `;
+  response.headers.set('Content-Security-Policy', csp.trim().replace(/\n/g, ' '));
+  return response;
+}
+
 export default {
   async fetch(request, env, executionContext) {
     try {
-      /**
-       * Open a cache instance in the worker and a custom session instance.
-       */
       if (!env?.SESSION_SECRET) {
         throw new Error('SESSION_SECRET environment variable is not set');
       }
@@ -32,9 +41,6 @@ export default {
         HydrogenSession.init(request, [env.SESSION_SECRET]),
       ]);
 
-      /**
-       * Create Hydrogen's Storefront client.
-       */
       const {storefront} = createStorefrontClient({
         cache,
         waitUntil,
@@ -47,17 +53,13 @@ export default {
       });
 
       const cart = createCartHandler({
-        storefront, // storefront is created by the createStorefrontClient
+        storefront,
         getCartId: cartGetIdDefault(request.headers),
         setCartId: cartSetIdDefault({
           maxage: 60 * 60 * 24 * 365, // 1 year expiry
         }),
       });
 
-      /**
-       * Create a Remix request handler and pass
-       * Hydrogen's Storefront client to the loader context.
-       */
       const handleRequest = createRequestHandler({
         build: remixBuild,
         mode: process.env.NODE_ENV,
@@ -67,28 +69,20 @@ export default {
       const response = await handleRequest(request);
 
       if (response.status === 404) {
-        /**
-         * Check for redirects only when there's a 404 from the app.
-         * If the redirect doesn't exist, then `storefrontRedirect`
-         * will pass through the 404 response.
-         */
         return storefrontRedirect({request, response, storefront});
       }
 
+      // Apply the Content Security Policy to the response
+      setContentSecurityPolicy(response, env);
+
       return response;
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       return new Response('An unexpected error occurred', {status: 500});
     }
   },
 };
 
-/**
- * This is a custom session implementation for your Hydrogen shop.
- * Feel free to customize it to your needs, add helper methods, or
- * swap out the cookie-based implementation with something else!
- */
 export class HydrogenSession {
   sessionStorage;
   session;
@@ -109,7 +103,6 @@ export class HydrogenSession {
     });
 
     const session = await storage.getSession(request.headers.get('Cookie'));
-
     return new this(storage, session);
   }
 

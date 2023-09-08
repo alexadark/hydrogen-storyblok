@@ -19,8 +19,6 @@ const Banner = ({blok}) => {
       </div>
       <div>
         <img src={`${image.filename}/m/670x840`} alt={image.altText} />
-        <h1>test</h1>
-        <img src="https://picsum.photos/200/300" alt="" />
       </div>
     </section>
   );
