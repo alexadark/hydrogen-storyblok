@@ -6,3 +6,5 @@ node_modules
 /.mf
 .env
 .shopify
+localhost-key.pem
+localhost.pem

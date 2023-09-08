@@ -16,7 +16,7 @@ const CollectionCard = ({collection}) => {
       <Image
         data={image}
         alt={title}
-        className="object-cover mb-10 aspect-square"
+        className="object-cover mb-10 !aspect-square"
       />
     </Link>
   );
