@@ -4,11 +4,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from '@remix-run/react';
 import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
 import {Layout} from './components/Layout';
+import {defer} from '@shopify/remix-oxygen';
 
 export const links = () => {
   return [
@@ -26,15 +26,15 @@ export const links = () => {
 };
 
 export async function loader({context}) {
-  const layout = await context.storefront.query(LAYOUT_QUERY);
-  return {layout};
+  const {cart} = context;
+  const {shop} = await context.storefront.query(SHOP_QUERY);
+  return defer({
+    shop,
+    cart: cart.get(),
+  });
 }
 
 export default function App() {
-  const data = useLoaderData();
-
-  const {name} = data.layout.shop;
-
   return (
     <html lang="en">
       <head>
@@ -54,7 +54,7 @@ export default function App() {
   );
 }
 
-const LAYOUT_QUERY = `#graphql
+const SHOP_QUERY = `#graphql
   query layout {
     shop {
       name

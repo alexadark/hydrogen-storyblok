@@ -22,9 +22,11 @@
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "headroom.js": "^0.12.0",
+    "invariant": "^2.2.4",
     "isbot": "^3.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-headroom": "^3.2.1",
     "react-icons": "^4.11.0",
     "react-use-cookie": "^1.4.0",
     "storyblok-rich-text-react-renderer": "^2.9.0"
@@ -34,6 +36,8 @@
     "@shopify/prettier-config": "^1.1.2",
     "eslint": "^8.20.0",
     "eslint-plugin-hydrogen": "0.12.2",
+    "postcss": "^8.4.29",
+    "postcss-cli": "^10.1.0",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.3.3"
   },

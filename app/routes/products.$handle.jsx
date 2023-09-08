@@ -1,8 +1,8 @@
 import {useLoaderData} from '@remix-run/react';
 import {json} from 'react-router';
-import ProductOptions from '~/components/ProductOptions';
+// import ProductOptions from '~/components/ProductOptions';
 import {Image, Money, ShopPayButton} from '@shopify/hydrogen-react';
-// import {AddToCartButton} from '~/components/cart';
+import {AddToCartButton} from '~/components/cart';
 
 const seo = ({data}) => ({
   title: data?.product?.title,
@@ -68,10 +68,10 @@ export default function ProductHandle() {
               {product.title}
             </h1>
           </div>
-          <ProductOptions
+          {/* <ProductOptions
             options={product.options}
             selectedVariant={selectedVariant}
-          />
+          /> */}
           <Money
             withoutTrailingZeros
             data={selectedVariant.price}
@@ -85,10 +85,10 @@ export default function ProductHandle() {
                 width={'400px'}
                 className="mb-3"
               />
-              {/* <AddToCartButton
+              <AddToCartButton
                 variantId={selectedVariant?.id}
                 style="w-full mt-2"
-              /> */}
+              />
             </div>
           )}
 
