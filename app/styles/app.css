@@ -38,14 +38,14 @@
   }
 }
 @layer components {
-  nav {
+  /* nav {
     li {
       @apply uppercase;
       a {
         @apply hover:text-primary hover:underline;
       }
     }
-  }
+  } */
   .btn {
     @apply px-6 py-3 tracking-wider text-black uppercase transition duration-500 bg-primary hover:-translate-y-1;
   }
