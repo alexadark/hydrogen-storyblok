@@ -1,6 +1,5 @@
 import {useLoaderData} from '@remix-run/react';
 import {json} from 'react-router';
-// import ProductOptions from '~/components/ProductOptions';
 import {Image, Money, ShopPayButton} from '@shopify/hydrogen-react';
 import {AddToCartButton} from '~/components/cart';
 
@@ -68,10 +67,7 @@ export default function ProductHandle() {
               {product.title}
             </h1>
           </div>
-          {/* <ProductOptions
-            options={product.options}
-            selectedVariant={selectedVariant}
-          /> */}
+
           <Money
             withoutTrailingZeros
             data={selectedVariant.price}
