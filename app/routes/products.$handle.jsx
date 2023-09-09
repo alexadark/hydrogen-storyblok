@@ -1,6 +1,6 @@
 import {useLoaderData} from '@remix-run/react';
 import {json} from 'react-router';
-import {Image, Money, ShopPayButton} from '@shopify/hydrogen-react';
+import {Image, Money, ShopPayButton} from '@shopify/hydrogen';
 import {AddToCartButton} from '~/components/cart';
 
 const seo = ({data}) => ({

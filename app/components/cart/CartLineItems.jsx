@@ -1,4 +1,4 @@
-import {flattenConnection} from '@shopify/hydrogen-react';
+import {flattenConnection} from '@shopify/hydrogen';
 import LineItem from './LineItem';
 
 export const CartLineItems = ({linesObj}) => {

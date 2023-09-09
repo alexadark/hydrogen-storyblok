@@ -1,5 +1,5 @@
 import {Link} from '@remix-run/react';
-import {Image, Money} from '@shopify/hydrogen-react';
+import {Image, Money} from '@shopify/hydrogen';
 import RemoveFromCartButton from './RemoveFromCartButton';
 
 const LineItem = ({lineItem}) => {

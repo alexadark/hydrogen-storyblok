@@ -34,13 +34,6 @@ export async function loader({params, context, request}) {
   });
 }
 
-// export const meta = ({data}) => {
-//   return {
-//     title: data?.collection?.title ?? 'Collection',
-//     description: data?.collection?.description,
-//   };
-// };
-
 export default function Collection() {
   const {collection} = useLoaderData();
   // personalization: we set the user type to the collection title that the user is currently viewing
