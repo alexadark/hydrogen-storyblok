@@ -6,7 +6,12 @@ const Menu = () => {
     <nav>
       <ul className="flex space-x-4">
         <li>
-          <Link to="/collections">Boards</Link>
+          <Link
+            className="uppercase transition duration-300 hover:text-primary hover:underline"
+            to="/collections"
+          >
+            Boards
+          </Link>
         </li>
       </ul>
     </nav>
