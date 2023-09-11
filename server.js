@@ -16,15 +16,19 @@ import {
 function setContentSecurityPolicy(response, env) {
   const csp = `
     default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
-    style-src 'self' 'unsafe-inline' https://cdn.shopify.com https://fonts.googleapis.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com app.storyblok.com bridge.storyblok.com;
+    style-src 'self' 'unsafe-inline' https://cdn.shopify.com https://fonts.googleapis.com app.storyblok.com bridge.storyblok.com;
     img-src *;
     font-src *;
     connect-src 'self' ${env.PUBLIC_STORE_DOMAIN} https://cdn.shopify.com https://shopify.com;
-    frame-src *;
-    frame-ancestors *;
+    frame-src 'self' app.storyblok.com bridge.storyblok.com
+    frame-ancestors 'self' app.storyblok.com bridge.storyblok.com;
+
   `;
-  response.headers.set('Content-Security-Policy', csp.trim().replace(/\n/g, ' '));
+  response.headers.set(
+    'Content-Security-Policy',
+    csp.trim().replace(/\n/g, ' '),
+  );
   return response;
 }
 
