@@ -17,9 +17,9 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 
 ```
 SESSION_SECRET="foobar"
-PUBLIC_STOREFRONT_API_TOKEN="4cadc2039d297ce44b1c9d3977b86372"
-PUBLIC_STOREFRONT_API_VERSION="2023-01"
-PUBLIC_STORE_DOMAIN="hydroblok.myshopify.com"
+PUBLIC_STOREFRONT_API_VERSION="2023-07"
+PUBLIC_STOREFRONT_API_TOKEN="78a9c49d5b74cd74fdbe35bbd3bd65c5"
+PUBLIC_STORE_DOMAIN="https://hydrobloks.myshopify.com"
 ```
 
 - Open a storyblok account if you don't already have one: https://www.storyblok.com/
