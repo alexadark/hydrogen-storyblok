@@ -15,14 +15,14 @@ import {
 
 function setContentSecurityPolicy(response, env) {
   const csp = `
-    default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com app.storyblok.com bridge.storyblok.com;
-    style-src 'self' 'unsafe-inline' https://cdn.shopify.com https://fonts.googleapis.com app.storyblok.com bridge.storyblok.com;
-    img-src *;
-    font-src *;
-    connect-src 'self' ${env.PUBLIC_STORE_DOMAIN} https://cdn.shopify.com https://shopify.com;
-    frame-src 'self' app.storyblok.com bridge.storyblok.com
-    frame-ancestors 'self' app.storyblok.com bridge.storyblok.com;
+  default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.shopify.com https://shopify.com app.storyblok.com bridge.storyblok.com localhost:3000 https://unpkg.com;
+  style-src 'self' 'unsafe-inline' https://cdn.shopify.com https://fonts.googleapis.com app.storyblok.com bridge.storyblok.com localhost:3000 https://unpkg.com;
+  img-src *;
+  font-src 'self' data: *;
+  connect-src 'self' ${env.PUBLIC_STORE_DOMAIN} https://cdn.shopify.com https://shopify.com localhost:3000;
+  frame-src 'self' app.storyblok.com bridge.storyblok.com;
+  frame-ancestors 'self' app.storyblok.com bridge.storyblok.com;
 
   `;
   response.headers.set(
