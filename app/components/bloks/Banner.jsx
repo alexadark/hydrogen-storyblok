@@ -3,7 +3,6 @@ import {storyblokEditable} from '@storyblok/react';
 
 const Banner = ({blok}) => {
   const {user_type, _uid, title, text, image} = blok;
-  console.log('image', image);
   return (
     <section
       key={_uid}
